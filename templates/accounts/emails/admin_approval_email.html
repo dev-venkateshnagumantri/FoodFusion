@@ -1,0 +1,15 @@
+{% autoescape off %}
+
+Hi {{user.first_name}} !
+
+{% if is_approved %}
+
+Congratulations ! you are approved. you can start posting your items in the Market Place.
+
+{% else%}
+
+We're extremly sorry. you are not eligible to move forward. Please contact support@foodOnline.com for any queries.
+
+{% endif %}
+
+{% endautoescape %}

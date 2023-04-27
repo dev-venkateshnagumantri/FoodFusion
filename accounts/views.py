@@ -81,7 +81,7 @@ def registerVendor(request):
             #send verification mail
             send_verification_email(request, user)
             
-            messages.success(request, 'Your account has been registered sucessfully! Please check your mail and wait for the approval.')
+            messages.success(request, 'Your account has been registered sucessfully! Please check your mail to activate and wait for the approval.')
             return redirect('accounts:registerVendor')
         else:
             print(form.errors)
