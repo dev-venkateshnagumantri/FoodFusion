@@ -42,7 +42,7 @@
                                     <tr>
                                         <td class="text-left">{{ forloop.counter }}</td>
                                         <td class="text-left">
-                                            <a href="{% url 'vendor:fooditems_by_category' cat.id %}"><p class="mb-0 font-weight-bold">{{ cat }}</p>
+                                            <a href="{% url 'vendor:fooditems_by_category' cat.pk %}"><p class="mb-0 font-weight-bold">{{ cat }}</p>
                                             <small class="text-muted">{{cat.description}}</small></a>
                                         </td>
                                         <td><a href="{% url 'vendor:edit_category' cat.id %}" style="color:unset;"><i class="fa fa-pencil" aria-hidden="true"></i></a> &nbsp; &nbsp; <a href="{% url 'vendor:delete_category' cat.id %}" onclick="return confirm('Are you sure you want to delete this category?')"><i class="fa fa-trash text-danger" aria-hidden="true"></i></a></td>
