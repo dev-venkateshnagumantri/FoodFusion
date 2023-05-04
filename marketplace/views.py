@@ -6,12 +6,15 @@ from vendor.models import Vendor
 from menu.models import Category,FoodItem
 from .models import Cart
 from django.contrib.auth.decorators import login_required
+from vendor.models import OpeningHour
+from datetime import date
 # Create your views here.
 
 
 def marketplace(request):
     vendors = Vendor.objects.filter(is_approved=True,user__is_active=True)[:8]
     vendors_count = vendors.count()
+    
     context = {
         'vendors':vendors,
         'vendors_count':vendors_count,
@@ -32,11 +35,20 @@ def vendor_detail(request, vendor_slug):
     else:
         cart_items = None
 
+    # Check current day's opening hours.
+    today_date = date.today()
+    today = today_date.isoweekday()
+
+    current_opening_hour = OpeningHour.objects.filter(vendor=vendor,day=today)
+    opening_hours = OpeningHour.objects.filter(vendor=vendor).order_by('day','-from_hour')
     context={
         'vendor':vendor,
         'categories':categories,
         'cart_items':cart_items,
+        'opening_hours': opening_hours,
+        'current_opening_hour': current_opening_hour,
     }
+
     return render(request,'marketplace/vendor_detail.html',context)
 
 def add_to_cart(request, food_id):
