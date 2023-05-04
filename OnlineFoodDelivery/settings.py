@@ -157,7 +157,7 @@ EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = 'foodOnline Market Place <venkateshnagumantri01@gmail.com>'
 
 
-GOOGLE_API_KEY = 'AIzaSyDUtXE1jktHQUNrcQ3w9kzMYLW7Cw-LdAY'
+GOOGLE_API_KEY = config('GOOGLE_API_KEY')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
