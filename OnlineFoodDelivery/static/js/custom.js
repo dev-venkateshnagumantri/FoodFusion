@@ -221,7 +221,14 @@ $(document).ready(function(){
         }
     }
 
+    //Disable cart if restaurant is closed
+    $('.disable_cart').on('click',function(e){
+        e.preventDefault();
+        swal("Cart functionality is disabled for this restaurant as it is closed right now!",'','info');
 
+    });
+
+    // ADD OPENING HOUR
     $('.add_hour').on('click', function(e){
         e.preventDefault();
         var day = document.getElementById('id_day').value;

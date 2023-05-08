@@ -17,7 +17,7 @@
                             <div class="listing-sorting-holder">
                                 <div class="row">
                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                        <h4>{{vendors_count}} Restaurant's found</h4>
+                                        <h4>{% if vendors_count %}{{vendors_count}}{% else %}No{% endif %} Restaurants found</h4>
                                     </div>
                                 </div>
                             </div>
@@ -48,6 +48,11 @@
                                                 </div>
                                                 {% if vendor.user_profile.address %}
                                                     <span><small class="text-muted">{{ vendor.user_profile.address }}</small></span>
+                                                {% endif %}
+                                                
+                                                <br>
+                                                {% if source_location %}
+                                                    <span><small><b>{{vendor.kms}}km</b> away from {{source_location}}</small></span>
                                                 {% endif %}
 
                                             </div>

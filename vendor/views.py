@@ -77,7 +77,7 @@ def add_category(request):
             category = form.save(commit=False)
             category.vendor = Vendor.objects.get(user=request.user)
             category.save() # here the category id will be generated
-            category.slug = slugify(category_name)+'-'+str(category.id) # mutton-15
+            category.slug = slugify(category_name)+'-'+slugify(category.vendor) # mutton-taste-feeders
             category.save()
             messages.success(request, 'Category has been added successfully!')
             return redirect('vendor:menu-builder')
@@ -103,7 +103,7 @@ def edit_category(request,pk=None):
             category = form.save(commit=False)
             category.vendor = Vendor.objects.get(user=request.user)
             category.save() # here the category id will be generated
-            category.slug = slugify(category_name)+'-'+str(category.id) # mutton-15
+            category.slug = slugify(category_name)+'-'+slugify(category.vendor) # mutton-taste-feeders
             category.save()
             messages.success(request, 'Category has been updated successfully!')
             return redirect('vendor:menu-builder')
@@ -138,7 +138,7 @@ def add_food(request):
             food = form.save(commit=False)
 
             food.vendor =  Vendor.objects.get(user=request.user)
-            food.slug = slugify(foodtitle)
+            food.slug = slugify(foodtitle)+'-'+slugify(food.vendor)
             form.save()
             messages.success(request, 'Food Item has been added successfully!')
             return redirect('vendor:fooditems_by_category', food.category.id)
@@ -165,7 +165,7 @@ def edit_food(request, pk=None):
             foodtitle = form.cleaned_data['food_title']
             food = form.save(commit=False)
             food.vendor = Vendor.objects.get(user=request.user)
-            food.slug = slugify(foodtitle)
+            food.slug = slugify(foodtitle)+'-'+slugify(food.vendor)
             form.save()
             messages.success(request, 'Food Item has been updated successfully!')
             return redirect('vendor:fooditems_by_category', food.category.id)
