@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-	{%load static%}
+{% load static %}
 
 	<!-- Main Section Start -->
 	<div class="main-section">
@@ -71,31 +71,42 @@
 		
 		<!-- Top Restarurants Section Start -->
 		<div class="page-section nopadding cs-nomargin" style="margin-top: 0px;padding-top: 60px;padding-bottom: 0px;margin-bottom: 0px;background: #ffffff;">
-			<div class="container">
+			<div class="container" >
 				<div class="row">
 					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 						<div class="element-title align-left">
-							<h2>Top Restaurants</h2>
-							<p>Explore restaurants, bars, and cafés by locality</p>
+							<h2>Nearby Restaurants</h2>
+							<p>Explore restaurants, bars, and cafes near to you</p>
 						</div>
 					</div>
-					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding-right: 0 !important; padding-left: 0 !important;">
-						<div class="company-logo">
-							<ul>
+					
 							{% for vendor in vendors %}
-								<li class="has-border">
-									<figure>
-										{% if vendor.user_profile.profile_picture %}
-										<a href="#"><img src="{{ vendor.user_profile.profile_picture.url }}" height="125" class="attachment-full size-full wp-post-image" alt=""></a>
-										{% else %}
-										<a href="#"><img src="{% static 'extra-images/default-profile.jpg' %}" height="125" class="attachment-full size-full wp-post-image" alt=""></a>
-										{% endif %}
-									</figure>
-								</li>
+									<div class="col-2.5" style="margin-left:20px !important; margin-bottom:15px !important;">
+										<div class="card" style="width: 15rem !important;">
+											<center>
+											{% if vendor.user_profile.profile_picture %}
+												<a href="{% url 'marketplace:vendor_detail' vendor.vendor_slug %}"><img src="{{ vendor.user_profile.profile_picture.url }}" height="125" style="margin-top:20px;" class="attachment-full size-full wp-post-image" alt=""></a>
+											{% else %}
+												<a href="{% url 'marketplace:vendor_detail' vendor.vendor_slug %}"><img src="{% static 'extra-images/default-profile.jpg' %}" height="125" style="margin-top:20px;" class="attachment-full size-full wp-post-image" alt=""></a>
+											{% endif %}
+											</center>
+											<div class="card-body">
+												<center>
+													<div class="card-title">
+													<h5>
+														<a href="{% url 'marketplace:vendor_detail' vendor.vendor_slug %}">{{vendor.vendor_name}}</a>
+													</h5>
+													</div>
+												{% if vendor.kms %}
+													<p class="card-text"><small><b>{{vendor.kms}} kms </b>away</small></p>
+												{% endif %}
+												</center>
+											</div>
+										</div>
+									</div>
+									
 							{% endfor %}
-							</ul>
-						</div>
-					</div>
+					
 				</div>
 			</div>
 		</div>
@@ -133,17 +144,17 @@
 
 											</div>
 											<div class="text-holder">
-												
 												<div class="post-title">
 													<h5>
-														<a href="listing-detail.html">{{ vendor }}</a>
+														<a href="{% url 'marketplace:vendor_detail' vendor.vendor_slug %}">{{ vendor }}</a>
 														
 													</h5>
 												</div>
 												<address>
 													{% if vendor.user_profile.city and vendor.user_profile.state and vendor.user_profile.pin_code %}
 														<span>{{ vendor.user_profile.city }}, {{ vendor.user_profile.state }}, {{ vendor.user_profile.pin_code }}</span>
-													{% endif %}
+													
+														{% endif %}
 												</address>
 											</div>
 											
