@@ -27,6 +27,7 @@ urlpatterns = [
     path('accounts/',include('accounts.urls')),
     path('vendor/',include('vendor.urls')),
     path('marketplace/',include('marketplace.urls')),
+    path('customer/',include('customers.urls')),
 
     #CART
     path('cart/', MarketplaceViews.cart, name='cart'),
