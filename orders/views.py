@@ -154,14 +154,14 @@ def order_complete(request):
             subtotal += (item.price * item.quantity)
 
         tax_data = json.loads(order.tax_data)
-        print(tax_data)
+        #print(tax_data)
         context = {
             'order': order,
             'ordered_food': ordered_food,
             'subtotal': subtotal,
             'tax_data': tax_data,
         }
-        
+        #print(1)
         return render(request,'orders/order_complete.html',context)
 
     except:

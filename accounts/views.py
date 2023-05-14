@@ -1,4 +1,5 @@
 from django.shortcuts import render,redirect
+from orders.models import Order
 from .forms import UserForm
 from .models import User,UserProfile
 from django.contrib import messages, auth
@@ -131,7 +132,14 @@ def myAccount(request):
 @login_required
 @user_passes_test(check_role_customer)
 def customerDashboard(request):
-    return render(request,'accounts/customerDashboard.html')
+    orders = Order.objects.filter(user=request.user, is_ordered=True).order_by('-created_at')
+    recent_orders = orders[:5]
+    context = {
+        'orders': orders,
+        'orders_count': orders.count(),
+        'recent_orders': recent_orders,
+    }
+    return render(request,'accounts/customerDashboard.html',context)
 
 @login_required
 @user_passes_test(check_role_vendor)
