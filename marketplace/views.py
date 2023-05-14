@@ -9,11 +9,13 @@ from django.contrib.auth.decorators import login_required
 from vendor.models import OpeningHour
 from datetime import date
 from django.db.models import Q
-
+from accounts.models import UserProfile
 #GeoDjango
 from django.contrib.gis.geos import GEOSGeometry
 from django.contrib.gis.measure import D # ``D`` is a shortcut for ``Distance``
 from django.contrib.gis.db.models.functions import Distance
+
+from orders.forms import OrderForm
 # Create your views here.
 
 
@@ -109,7 +111,7 @@ def decrease_cart(request, food_id):
     else:
         return JsonResponse({'status': 'login_required', 'message': 'Please login to continue'})
     
-@login_required(login_url = 'login')
+@login_required(login_url = 'accounts:signin')
 def cart(request):
     cart_items = Cart.objects.filter(user=request.user).order_by('created_at')
     context = {
@@ -166,3 +168,32 @@ def search(request):
         'source_location':address,
     }
     return render(request,'marketplace/listings.html',context)
+
+@login_required(login_url='accounts:signin')
+def checkout(request):
+    cart_items = Cart.objects.filter(user=request.user ).order_by('created_at')
+    cnt=0
+    for item in cart_items:
+        if item.fooditem.vendor.is_open():
+            cnt+=1
+    if cnt == 0:
+        return redirect('marketplace:marketplace')
+    user_profile = UserProfile.objects.get(user=request.user)
+    default_values = {
+        'first_name': request.user.first_name,
+        'last_name': request.user.last_name,
+        'phone': request.user.phone_number,
+        'email': request.user.email,
+        'address': user_profile.address,
+        'country': user_profile.country,
+        'state': user_profile.state,
+        'city': user_profile.city,
+        'pin_code': user_profile.pin_code,
+    }
+    form = OrderForm(initial=default_values)
+    context = {
+        'form': form,
+        'cart_items': cart_items,
+    }
+   
+    return render(request,'marketplace/checkout.html',context)

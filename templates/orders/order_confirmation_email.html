@@ -1,0 +1,12 @@
+{% autoescape off %}
+
+Hi {{user.first_name}} !
+
+Thank you for choosing us. we value your time and efforts for placing order in our website.
+we are happy to inform that your order has been successfully confirmed.
+
+Your order number : {{order.order_number}}
+
+Transaction ID : {{order.payment.transaction_id}}
+
+{% endautoescape %}

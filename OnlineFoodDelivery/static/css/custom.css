@@ -6,11 +6,11 @@
 }
 
 .show-notification{
-    position: fixed;
+    position: fixed !important;
     bottom: 100%;
     right: 20px;
     animation-name: show-toast;
-    animation-duration: 10s;
+    animation-duration: 8s;
     z-index: 99;
 }
 
@@ -20,11 +20,23 @@
     cursor: pointer;
 }
 
-.card-title:hover
-{
-   
-    color: rgb(175, 42, 42);
-    transition: 0.2s;
-      
+
+/* hide radio button */
+.payment-method [type=radio]{
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
 }
 
+/* Image style */
+.payment-method [type=radio] + img{
+    cursor: pointer;
+    padding: 5px;
+    
+}
+
+/* Checked style */
+.payment-method [type=radio]:checked + img{
+    outline: 2px solid #ff0000;
+}

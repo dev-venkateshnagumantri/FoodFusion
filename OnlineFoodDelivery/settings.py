@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'marketplace',
     'django.contrib.gis',
     'customers',
+    'orders',
 ]
 
 MIDDLEWARE = [
@@ -75,6 +76,7 @@ TEMPLATES = [
                 'marketplace.context_processors.get_cart_amounts',
                 'accounts.context_processors.get_google_api',
                 'accounts.context_processors.get_user_profile',
+                'accounts.context_processors.get_paypal_clientid',
 
                 
             ],
@@ -174,3 +176,6 @@ GDAL_LIBRARY_PATH = os.path.join(BASE_DIR, 'env\Lib\site-packages\osgeo\gdal304.
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
+PAYPAL_CLIENT_ID = config('PAYPAL_CLIENT_ID')
+
+SECURE_CROSS_ORIGIN_OPENER_POLICY = 'same-origin-allow-popups'
