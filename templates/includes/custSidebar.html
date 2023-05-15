@@ -2,7 +2,7 @@
     <div class="user-nav-list">
         <ul>
             <li class="{% if '/accounts/customerDashboard/' == request.path or '/customer/' == request.path %}active{% endif %}"><a href="{% url 'accounts:myAccount' %}"><i class="icon-dashboard3"></i>Dashboard</a></li>
-            <li class="{% if '/customer/my-orders/' == request.path or '/order-detail/' == request.path  %}active{% endif %}"><a href="{% url 'customers:my_orders' %}"><i class="icon-add_shopping_cart"></i>My Orders</a></li>
+            <li class="{% if '/customer/my-orders/' == request.path or 'order-detail' in request.path  %}active{% endif %}"><a href="{% url 'customers:my_orders' %}"><i class="icon-add_shopping_cart"></i>My Orders</a></li>
        
             <li class="{% if '/customer/profile/' == request.path %}active{% endif %}"><a href="{% url 'customers:profile' %}"><i class="icon-build"></i>Profile Settings</a></li>
     
