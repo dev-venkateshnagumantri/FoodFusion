@@ -105,14 +105,14 @@
 
                                                     {% if not vendor.is_open %}
                                                     <div class="price-holder">
-                                                        <span class="price">${{ food.price }}</span>
+                                                        <span class="price"><b>₹{{ food.price }}</b></span>
                                                         <a href="#" class="disable_cart"  style="margin-right: 28px;" data-id="#" data-url="#"><i class="icon-minus text-color"></i></a>
                                                         <label id="qty-{{food.id}}">0</label>
                                                         <a href="#" class="disable_cart" data-id="#" data-url="#" ><i class="icon-plus4 text-color"></i></a>
                                                     </div>
                                                     {% else %}
                                                     <div class="price-holder">
-                                                        <span class="price">${{ food.price }}</span>
+                                                        <span class="price"><b>₹{{ food.price }}</b></span>
                                                         <a href="#" class="decrease_cart"  style="margin-right: 28px;" data-id="{{ food.id }}" data-url="{% url 'marketplace:decrease_cart' food.id %}"><i class="icon-minus text-color"></i></a>
                                                         <label id="qty-{{food.id}}">0</label>
                                                         <a href="#" class="add_to_cart" data-id="{{ food.id }}" data-url="{% url 'marketplace:add_to_cart' food.id %}" ><i class="icon-plus4 text-color"></i></a>

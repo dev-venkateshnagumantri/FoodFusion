@@ -70,7 +70,7 @@
                                                             
                                                         </td>
                                                         <td>{{ item.quantity }} QTY</td>
-                                                        <td>${{ item.fooditem.price }}</td>
+                                                        <td>₹{{ item.fooditem.price }}</td>
                                                     </tr>
                                                     {% endfor %}
                                                 </tbody>
@@ -85,7 +85,7 @@
                                                         <li style="list-style-type: none;">
                                                             Subtotal
                                                             <span class="price float-right">
-                                                                <span class="currency">$</span>
+                                                                <span class="currency">₹</span>
                                                                 <span id="subtotal">{{ subtotal }}</span>
                                                             </span>
                                                         </li>
@@ -95,7 +95,7 @@
                                                                 <li style="list-style-type: none;">
                                                                     {{ key }} <small>({{ i }}%)</small>
                                                                     <span class="price float-right">
-                                                                        <span class="currency">$</span>
+                                                                        <span class="currency">₹</span>
                                                                         <span id="tax-{{ key }}">{{ j }}</span>
                                                                     </span>
                                                                 </li>
@@ -106,7 +106,7 @@
                                                         <li style="list-style-type: none; font-weight: 600;">
                                                             TOTAL
                                                             <span class="price float-right">
-                                                                <span class="currency">$</span>
+                                                                <span class="currency">₹</span>
                                                                 <span id="total">{{ grand_total }}</span>
                                                             </span>
                                                         </li>

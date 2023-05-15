@@ -71,7 +71,7 @@
                                                             <td><img src="{{ item.fooditem.image.url }}" width="40" alt="Food Image"></td>
                                                             <td><b>{{ item.fooditem }}</b></td>
                                                             <td>{{ item.quantity }}</td>
-                                                            <td>${{ item.item_total_cost}}</td>
+                                                            <td>₹ {{ item.item_total_cost}}</td>
                                                         </tr>
                                                     {% endif %}
                                                 {% endfor %}
@@ -82,7 +82,7 @@
                                             <li style="list-style-type: none;">
                                                 Subtotal
                                                 <span class="price float-right">
-                                                    <span class="currency">$</span>
+                                                    <span class="currency">₹</span>
                                                     <span id="subtotal">{{ subtotal }}</span>
                                                 </span>
                                             </li>
@@ -92,7 +92,7 @@
                                                     <li style="list-style-type: none;">
                                                         {{ key }} <small>({{ i }}%)</small>
                                                         <span class="price float-right">
-                                                            <span class="currency">$</span>
+                                                            <span class="currency">₹</span>
                                                             <span id="tax-{{ key }}">{{ j }}</span>
                                                         </span>
                                                     </li>
@@ -103,7 +103,7 @@
                                             <li style="list-style-type: none; font-weight: 600;">
                                                 TOTAL
                                                 <span class="price float-right">
-                                                    <span class="currency">$</span>
+                                                    <span class="currency">₹</span>
                                                     <span id="total">{{ grand_total }}</span>
                                                 </span>
                                             </li>
@@ -146,7 +146,8 @@
             return cookieValue;
         }
 
-    var grand_total = "{{grand_total}}"
+    var us_grand_total = "{{us_grand_total|floatformat:2}}"
+    //console.log(us_grand_total)
     var url = "{% url 'orders:payment' %}"
     var order_number = "{{ order.order_number }}"
     var order_complete = "{% url 'orders:order_complete' %}"
@@ -160,7 +161,7 @@
             return actions.order.create({
                 purchase_units: [{
                     amount: {
-                        value: grand_total
+                        value: us_grand_total
                     }
                 }]
             });
