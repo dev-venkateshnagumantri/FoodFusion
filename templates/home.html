@@ -7,7 +7,7 @@
 	<div class="main-section">
 		<!-- Home Pages Elements Strat -->
 		<!-- Main Search Start -->
-		<div class="page-section nopadding cs-nomargin" style="padding-top: 200px; padding-bottom: 150px; margin-bottom: 0px; background: url({% static 'extra-images/bg-image4.jpg' %}) no-repeat center / cover;">
+		<div class="page-section nopadding cs-nomargin" style="padding-top: 200px; padding-bottom: 150px; margin-bottom: 0px; background: url({% static 'extra-images/bg-image1.jpg' %}) no-repeat center / cover;">
 			<div class="container">
 				<div class="row">
 					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
@@ -69,7 +69,7 @@
 		</div>
 		<!-- Main Search End -->
 		
-		<!-- Top Restarurants Section Start -->
+		<!-- Nearby Restarurants Section Start -->
 		<div class="page-section nopadding cs-nomargin" style="margin-top: 0px;padding-top: 60px;padding-bottom: 0px;margin-bottom: 0px;background: #ffffff;">
 			<div class="container" >
 				<div class="row">
@@ -83,6 +83,13 @@
 							{% for vendor in vendors %}
 									<div class="col-2.5" style="margin-left:20px !important; margin-bottom:20px !important;">
 										<div class="card" style="width: 15rem !important;">
+											{% if vendor.is_open %}
+												<div class="ribbon"><span>Open</span>
+												</div>
+											{% else %}
+												<div class="ribbon red"><span>Close</span>
+												</div>
+											{% endif %}
 											<center>
 											{% if vendor.user_profile.profile_picture %}
 												<a href="{% url 'marketplace:vendor_detail' vendor.vendor_slug %}"><img src="{{ vendor.user_profile.profile_picture.url }}" height="125" style="margin-top:20px;" class="attachment-full size-full wp-post-image" alt=""></a>
@@ -97,10 +104,17 @@
 														<a href="{% url 'marketplace:vendor_detail' vendor.vendor_slug %}">{{vendor.vendor_name}}</a>
 													</h5>
 													</div>
+													<address>
+														{% if vendor.user_profile.city and vendor.user_profile.state and vendor.user_profile.pin_code %}
+															<span>{{ vendor.user_profile.city }}, {{ vendor.user_profile.state }}, {{ vendor.user_profile.pin_code }}</span>
+														
+															{% endif %}
+													</address>
 												{% if vendor.kms %}
 													<p class="card-text"><small><b>{{vendor.kms}} kms </b>away</small></p>
 												{% endif %}
 												</center>
+												
 											</div>
 										</div>
 									</div>
@@ -116,15 +130,15 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-						<div class="element-title align-center">
-							<h2>Choose From Most Popular Restaurants</h2>
-							<p>Cum doctus civibus efficiantur in imperdiet deterruisset.</p>
+						<div class="element-title align-left">
+							<h2>Most Popular Restaurants</h2>
+							<p>Order from the most popular resturants in your locality</p>
 						</div>
 					</div>
 					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 						<div class="listing fancy">
 							<ul class="row">
-								{% for vendor in vendors %}
+								{% for vendor,count in popular_vendors.items %}
 									<li class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 										<div class="list-post featured">
 											<div class="img-holder">
@@ -156,6 +170,7 @@
 													
 														{% endif %}
 												</address>
+												<p > Orders served : <b>{{count}}</b></p>
 											</div>
 											
 										</div>

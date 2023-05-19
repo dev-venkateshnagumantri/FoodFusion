@@ -1,0 +1,10 @@
+{% autoescape off %}
+
+
+We proceeded your order cancellation. Please find details about your cancelled order.
+
+Order details:
+Order number : {{order.order_number}}
+Transaction ID : {{order.payment.transaction_id}}
+
+{% endautoescape %}

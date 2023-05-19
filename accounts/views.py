@@ -53,7 +53,7 @@ def registerUser(request):
             send_verification_email(request, user,mail_subject,mail_template)
 
             messages.success(request,"Great! You just created your account! check your mail to activate.")
-            return redirect('accounts:registerUser')
+            return redirect('accounts:signin')
         else:
             print(form.errors)   
     else:    
@@ -91,7 +91,7 @@ def registerVendor(request):
             send_verification_email(request, user,mail_subject,mail_template)
             
             messages.success(request, 'Your account has been registered sucessfully! Please check your mail to activate and wait for the approval.')
-            return redirect('accounts:registerVendor')
+            return redirect('accounts:signin')
         else:
             print(form.errors)
             print(v_form.errors)
@@ -243,7 +243,7 @@ def reset_password(request):
             messages.success(request, 'Password reset successful')
             return redirect('accounts:signin')
         else:
-            messages.error(request, 'Password do not match!')
+            messages.error(request, 'Passwords do not match!')
             return redirect('accounts:reset_password')
     return render(request, 'accounts/reset_password.html')
 

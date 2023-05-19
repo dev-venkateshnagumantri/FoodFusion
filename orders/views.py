@@ -63,7 +63,8 @@ def place_order(request):
             order = Order()
             order.first_name = form.cleaned_data['first_name']
             order.last_name = form.cleaned_data['last_name']
-            order.phone = form.cleaned_data['phone']
+            order.phone = request.POST['phone_number']
+            # print("phone number:", order.phone)
             order.email = form.cleaned_data['email']
             order.address = form.cleaned_data['address']
             order.country = form.cleaned_data['country']
@@ -163,9 +164,9 @@ def payment(request):
         
     
         #clear the cart items
-        for item in cart_items:
-            if item.fooditem.vendor.is_open():
-                item.delete()
+        # for item in cart_items:
+        #     if item.fooditem.vendor.is_open():
+        #         item.delete()
         
         #return back to ajax whether status success or failure,incase success return order no. & trans. id
         response = {

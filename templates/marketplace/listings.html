@@ -67,7 +67,7 @@
                             </div>
                             
                         </div>
-                        
+                        {% if not user.is_authenticated %}
                         <div class="section-sidebar col-lg-3 col-md-3 col-sm-12 col-xs-12">
                             <div class="message-box" style="background-color: #fa9918;">
                                 <strong>I'm not Listed!</strong><span>is your restaurant or
@@ -75,8 +75,10 @@
                                     listed on over site</span>
                                 <a href="{% url 'accounts:registerVendor' %}" class="request-btn">Add Your business!</a>
                             </div>
-                        
                         </div>
+                        {% endif %}
+
+
                     </div>
                 </div>
             </div>

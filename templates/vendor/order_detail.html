@@ -30,9 +30,9 @@
                                                 </div>
                                                 <div class="col-md-6 text-right">
                                                     <p class="mb-0">{{ order.name }}</p>
-                                                    <p class="mb-0">{{ order.address }}</p>
-                                                    <p class="mb-0">{{ order.phone }}</p>
+                                                    <p class="mb-0">+91 {{ order.phone }}</p>
                                                     <p class="mb-0">{{ order.email }}</p>
+                                                    <p class="mb-0">{{ order.address }}</p>
                                                 </div>
                                             </div>
                                             
@@ -41,7 +41,7 @@
                             
                                             <div class="d-flex justify-content-between">
                                                 <div>
-                                                    <span class="d-block">Order Date: </span><span class="font-weight-bold">{{ order.created_at }}</span>
+                                                    <span class="d-block">Order Date: </span><span class="font-weight-bold">{{ order.get_ist_time }}</span>
                                                 </div>
                                                 <div>
                                                     <span class="d-block">Order No: </span><span class="font-weight-bold">{{ order.order_number }}</span>

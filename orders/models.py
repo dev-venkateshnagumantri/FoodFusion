@@ -1,9 +1,14 @@
+from datetime import datetime
 from django.db import models
 
 from accounts.models import User
 from menu.models import FoodItem
 from vendor.models import Vendor
 import simplejson as json
+
+#time related operations
+import pytz
+
 # Create your models here.
 
 request_object = ''
@@ -62,6 +67,21 @@ class Order(models.Model):
     def order_placed_to(self):
         return ", ".join([str(i) for i in self.vendors.all()])
     
+    def get_ist_time(self):
+        order = Order.objects.get(pk=self.pk)     
+        # print(order)
+        # Get the order's created_at datetime in UTC
+        created_at_utc = order.created_at.replace(tzinfo=pytz.UTC)
+        # print(created_at_utc)
+        # Convert the UTC datetime to IST
+        ist_tz = pytz.timezone('Asia/Kolkata')
+        created_at_ist = created_at_utc.astimezone(ist_tz)
+        # print(created_at_ist)
+
+        # Remove the timezone offset
+        created_at_without_offset = created_at_ist.replace(tzinfo=None)
+        return created_at_without_offset
+    
     def get_total_by_vendor(self):
         vendor = Vendor.objects.get(user=request_object.user)
         subtotal = 0
@@ -69,7 +89,7 @@ class Order(models.Model):
         tax_dict = {}
         if self.total_data:
             total_data = json.loads(self.total_data)
-            print(total_data)
+            #print(total_data)
             data = total_data.get(str(vendor.id))
             
             
@@ -86,13 +106,44 @@ class Order(models.Model):
                         tax += float(val[i][j])
         
         grand_total = float(subtotal) + float(tax)
-        print("grand_total =>",grand_total)
+        #print("grand_total =>",grand_total)
         context = {
             'subtotal': subtotal,
             'tax_dict': tax_dict, 
             'grand_total': grand_total,
         }
         return context
+    
+    def is_cancelable(self):
+        order = Order.objects.get(pk=self.pk)     
+        # print(order)
+        # Get the order's created_at datetime in UTC
+        created_at_utc = order.created_at.replace(tzinfo=pytz.UTC)
+
+        # Convert the UTC datetime to IST
+        ist_tz = pytz.timezone('Asia/Kolkata')
+        created_at_ist = created_at_utc.astimezone(ist_tz)
+
+        # Remove the timezone offset
+        created_at_without_offset = created_at_ist.replace(tzinfo=None)
+
+
+        ordered_time = created_at_without_offset
+        present_time = datetime.now()
+        # print("Ordered Time:", created_at_without_offset)
+        # print("Present Time:", present_time)
+        timediff = present_time - ordered_time
+        # print("Time Difference:", timediff)
+        tsecs = timediff.total_seconds()
+        tmins = tsecs/60
+        # print("Time Difference in Minutes:", tmins)
+        cancel = None
+        if tmins>0 and tmins<10:
+            cancel = True
+        else:
+            cancel = False
+        # print("Cancel Decision:", cancel)
+        return cancel
 
     def __str__(self):
         return self.order_number

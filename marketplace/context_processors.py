@@ -41,7 +41,7 @@ def get_cart_amounts(request):
         
         grand_total=subtotal+tax
         us_grand_total = grand_total*(Decimal(0.012))
-        print(us_grand_total)
+        # print(us_grand_total)
     return dict(subtotal=subtotal, tax=tax, grand_total=grand_total,tax_dict=tax_dict,us_grand_total=us_grand_total)
 
 
