@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+{% load static %}
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,6 +8,10 @@
     <title>FoodOnline</title>
 </head>
 <body>
-    <h2> You are not authorized to access this page !</h2>
+    <center>
+        <h1>404</h1>
+        <h2>The Requested Resource is not found</h2>
+        <img src="{% static 'images/paid.png' %}" alt="FoodOnline" >
+    </center>  
 </body>
 </html>
