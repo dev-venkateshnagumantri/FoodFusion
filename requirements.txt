@@ -1,0 +1,10 @@
+asgiref==3.6.0
+Django==4.2
+GDAL @ file:///C:/Users/mohan/Desktop/Online_Food_Delivery/GDAL-3.4.3-cp310-cp310-win_amd64.whl
+Pillow==9.5.0
+psycopg2==2.9.6
+python-decouple==3.8
+pytz==2023.3
+simplejson==3.19.1
+sqlparse==0.4.3
+tzdata==2023.3

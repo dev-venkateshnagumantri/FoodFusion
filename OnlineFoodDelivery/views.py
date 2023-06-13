@@ -12,17 +12,24 @@ from .utils import get_or_set_current_location
 def home(request):
 
     #Near by restaurants
+    flag=False
     if get_or_set_current_location(request) is not None:
         pnt = GEOSGeometry('POINT(%s %s)' % (get_or_set_current_location(request)))
-        vendors = Vendor.objects.filter(user_profile__location__distance_lte=(pnt, D(km=600))).annotate(distance=Distance("user_profile__location", pnt)).order_by("distance")
+        vendors = Vendor.objects.filter(user_profile__location__distance_lte=(pnt, D(km=50))).annotate(distance=Distance("user_profile__location", pnt)).order_by("distance")
         for v in vendors:
             v.kms = round(v.distance.km, 1)
+        flag=True
     else:
         vendors = Vendor.objects.filter(is_approved=True,user__is_active=True)
     
     #Popularity based restuarants
     arr=[]
-    pop_vendors = vendors[:6]
+    
+    pop_vendors = vendors
+
+    if flag:
+        pop_vendors = vendors[:6]
+    
     for vendor in pop_vendors:
         orders = Order.objects.filter(vendors__in=[vendor.id], is_ordered=True).order_by('-created_at')
         orders_count = orders.count()
