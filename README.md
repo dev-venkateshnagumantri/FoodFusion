@@ -1,7 +1,9 @@
 # OnlineFoodDelivery
+
 <p align="center">
   <img src="https://github.com/dev-venkateshnagumantri/OnlineFoodDelivery/blob/main/static/images/home%20page_m.png" alt="Home" >
-<br>  <h2 align="center" style="margin-top: -4px !important;"> Order your favourite food in online from popular restaurants near to you </h2>
+  
+<h2 align="center" style="margin-top: -4px !important;"> Order your favourite food in online from popular restaurants near to you </h2>
 </p>
 
 ## Introduction:
