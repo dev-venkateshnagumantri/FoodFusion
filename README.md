@@ -13,16 +13,20 @@ and restaurants with users in a single market place. The web application access 
 nearby restaurants to the user. The website contains a single smart sign in page which is capable of distinguishing
 between customer and vendor and redirects to their respective dashboard.
 
+
 <p align="center">
   <img src="https://github.com/dev-venkateshnagumantri/OnlineFoodDelivery/blob/main/static/images/customer.png" alt="user" >
 </p>
 
+
 - The website helps the users to know the status of nearby hotels whether open or closed dynamically based on hotel
 timings which are updated in real time. It also allows vendors to add their restaurant menu, categories and food items.
+
 
 <p align="center">
   <img src="https://github.com/dev-venkateshnagumantri/OnlineFoodDelivery/blob/main/static/images/vendor%201.png" alt="vendor" >
 </p>
+
 
 -  This platform offers International payment gate way PayPal to ensure a seamless user experience. Overall, the online food delivery web application offers a
 convenient and personalized way for users to discover new restaurants and food items.
@@ -34,17 +38,21 @@ However, existing food delivery websites often face challenges that hinder the u
 - The application also allows customers to order from multiple restaurants in one transaction, This eliminates the need
 for separate orders and potentially reduces delivery fees, providing customers with increased convenience and flexibility.
 
+
 <p align="center">
   <img src="https://github.com/dev-venkateshnagumantri/OnlineFoodDelivery/blob/main/static/images/foodOnline_Invoice.png" alt="many-many" >
 </p>
 
+
 - Additionally, a popularity-based recommendation system suggests popular dining options based on customers' preferences.
+
   
  <p align="center">
   <img src="https://github.com/dev-venkateshnagumantri/OnlineFoodDelivery/blob/main/static/images/Popularity.png" alt="image-popul">
 </p>
-## About:
 
+
+## About:
 
 I went through building of this web application from scratch by using HTML, CSS, Bootstrap, JavaScript, jQuery and Ajax in Frontend and Django, PostgreSQL, Geo-django and Postgis(Postgres Extension for location related operations) in Backend. The designing of this website took 4 months of time in total.
 
